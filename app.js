@@ -19,17 +19,11 @@ app.get('/register', (req, res)=> {
     res.render('register')
 })
 app.get('/signup', (req, res)=> {
- let userObj ={
-    firstname : 'Hello World',
-    lastname: 'second name'
- }
-    res.render('signup', userObj);
+    res.render('signup');
 });
 app.post('/register', urlencodedParser, (req, res)=> {
-    
     const errors = validationResult(req)
     if(!errors.isEmpty()) {
-        // return res.status(422).jsonp(errors.array())
         const alert = errors.array()
         res.render('register', {
             alert
@@ -40,7 +34,6 @@ app.post('/register', urlencodedParser, (req, res)=> {
             } else {
                req.body.newsletter = false;  
             }
-            console.log(req.body);
             res.render('signup', req.body);
     }
 
